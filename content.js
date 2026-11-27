@@ -56,5 +56,6 @@ window.INVITATION = {
     }
   ],
   "musicUrl": "",
-  "rsvpDeadline": "1 de octubre"
+  "rsvpDeadline": "13 de Febrero",
+  "googleFormUrl": "https://docs.google.com/forms/d/e/1FAIpQLSfNJupRecNZhMaoOqEnIHYWPUj-HnCsL0kxZqlOYEXHybgj6A/viewform?usp=publish-editor"
 };

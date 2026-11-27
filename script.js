@@ -7,6 +7,8 @@
     document.querySelector('[data-map="ceremony"]').href = data.ceremonyMap || "#";
     document.querySelector('[data-map="reception"]').href = data.receptionMap || "#";
     document.querySelectorAll("[data-map]").forEach(link => { if (link.getAttribute("href") !== "#") { link.target = "_blank"; link.rel = "noreferrer"; } else { link.removeAttribute("target"); } });
+    const formUrl = data.googleFormUrl || "";
+    document.getElementById("google-form").src = formUrl.replace(/\/viewform(?:\?.*)?$/, "/viewform?embedded=true");
     const timeline = document.getElementById("timeline"); timeline.replaceChildren();
     (data.schedule || []).forEach((item, i) => {
       const row = document.createElement("article"); row.className = "timeline-item reveal is-visible";
@@ -57,11 +59,4 @@
     else { music.pause(); musicButton.setAttribute("aria-pressed", "false"); musicButton.querySelector(".music-label").textContent = "Escuchar música"; }
   });
   music.addEventListener("ended", () => { musicButton.setAttribute("aria-pressed", "false"); musicButton.querySelector(".music-label").textContent = "Escuchar música"; });
-  document.querySelector('[name="attendance"]').addEventListener("change", e => document.querySelector(".guest-count-wrap").hidden = e.target.value !== "yes");
-  document.querySelector("#rsvp-form").addEventListener("submit", e => {
-    e.preventDefault(); const form = new FormData(e.currentTarget);
-    const record = { name: form.get("guest"), attendance: form.get("attendance"), guests: form.get("attendance") === "yes" ? form.get("guests") : 0, savedAt: new Date().toISOString() };
-    const all = JSON.parse(localStorage.getItem("quince-rsvps") || "[]"); all.push(record); localStorage.setItem("quince-rsvps", JSON.stringify(all));
-    e.currentTarget.hidden = true; document.querySelector(".rsvp-success").hidden = false;
-  });
 })();

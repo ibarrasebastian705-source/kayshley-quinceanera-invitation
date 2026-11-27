@@ -13,7 +13,7 @@
   <script src="editor.js" defer></script>
 </head>
 <body>
-  <header class="topbar"><a class="brand" href="index.html"><span>✳</span> INVITACIÓN XV</a><div class="top-actions"><span id="save-state">Cambios sin guardar</span><button class="secondary" id="reset">Restaurar desde el proyecto</button><button class="primary" id="download">Descargar cambios</button></div></header>
+  <header class="topbar"><a class="brand" href="index.html">INVITACIÓN XV</a><div class="top-actions"><span id="save-state">Cambios sin guardar</span><button class="secondary" id="reset">Restaurar desde el proyecto</button><button class="primary" id="download">Descargar cambios</button></div></header>
   <main class="editor-layout">
     <aside class="controls">
       <div class="intro"><p class="eyebrow">Tu invitación, a tu manera</p><h1>Editor en vivo</h1><p>Cambia los datos y mira cómo se actualizan en la vista previa.</p></div>
@@ -33,6 +33,7 @@
       <details><summary>Itinerario y confirmación</summary><div class="fields">
         <label>Itinerario <small>Un momento por línea, en formato: hora | título | detalle</small><textarea id="schedule" rows="5"></textarea></label>
         <label>Confirmar antes del<input data-key="rsvpDeadline" /></label>
+        <label>Enlace del formulario de Google<input data-key="googleFormUrl" type="url" /></label>
       </div></details>
       <details><summary>Fotos y música</summary><div class="fields">
         <label>Fotos <small>Una URL por línea. Usa enlaces directos a tus fotos.</small><textarea id="photos" rows="4"></textarea></label>

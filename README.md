@@ -24,7 +24,7 @@ The sample name, event details, and stock photos are placeholders. Update them b
 
 ## RSVP behavior
 
-The RSVP form provides a working front-end interaction and saves responses in the visitor's browser using local storage. Responses are not sent to the host, so this demo is not a shared RSVP service. To collect responses centrally, connect the form submit handler in `script.js` to a form service or your own backend.
+The RSVP section embeds the responder form configured in `content.js`. Link that Google Form to a Google Sheet from its Responses tab to collect guest replies there.
 
 ## Project files
 
