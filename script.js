@@ -21,7 +21,15 @@
     if (data.gallery?.[0]?.src) document.querySelector(".hero-photo").style.backgroundImage = `url("${data.gallery[0].src}")`;
     if (data.gallery?.[2]?.src) document.querySelector(".date-photo").style.backgroundImage = `url("${data.gallery[2].src}")`;
     if (data.gallery?.[1]?.src) document.querySelector(".schedule-photo").style.backgroundImage = `url("${data.gallery[1].src}")`;
-    if (data.gallery?.[3]?.src) document.querySelector(".rsvp-photo").style.backgroundImage = `url("${data.gallery[3].src}")`;
+    if (data.gallery?.[3]?.src || data.gallery?.[0]?.src) document.querySelector(".rsvp-photo").style.backgroundImage = `url("${(data.gallery[3] || data.gallery[0]).src}")`;
+    const setPhotoPosition = (selector, area, defaultY) => {
+      const pos = data.photoPositions?.[area] || {};
+      document.querySelector(selector).style.backgroundPosition = `${pos.x ?? 50}% ${pos.y ?? defaultY}%`;
+    };
+    setPhotoPosition(".hero-photo", "hero", 42);
+    setPhotoPosition(".date-photo", "date", 46);
+    setPhotoPosition(".schedule-photo", "schedule", 50);
+    setPhotoPosition(".rsvp-photo", "rsvp", 54);
     music.src = data.musicUrl || "";
     document.querySelector(".rsvp-panel > p strong").textContent = data.rsvpDeadline || "";
     tick();

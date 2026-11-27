@@ -52,22 +52,10 @@ window.INVITATION = {
     }
   ],
   "photoPositions": {
-    "hero": {
-      "x": 50,
-      "y": 44
-    },
-    "date": {
-      "x": 50,
-      "y": 0
-    },
-    "schedule": {
-      "x": 50,
-      "y": 11
-    },
-    "rsvp": {
-      "x": 50,
-      "y": 54
-    }
+    "hero": { "x": 50, "y": 42 },
+    "date": { "x": 50, "y": 46 },
+    "schedule": { "x": 50, "y": 50 },
+    "rsvp": { "x": 50, "y": 54 }
   },
   "musicUrl": "",
   "rsvpDeadline": "13 de Febrero",

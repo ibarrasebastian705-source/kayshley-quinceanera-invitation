@@ -6,12 +6,13 @@
   const saveState = document.getElementById("save-state");
   const schedules = document.getElementById("schedule");
   const photos = document.getElementById("photos");
+  const positionSliders = [...document.querySelectorAll("[data-position]")];
   const formatSchedule = items => (items || []).map(item => `${item.time} | ${item.title} | ${item.detail}`).join("\n");
   const parseSchedule = value => value.split("\n").map(line => line.split("|").map(part => part.trim())).filter(parts => parts[0] && parts[1]).map(([time, title, detail = ""]) => ({ time, title, detail }));
   const formatPhotos = items => (items || []).map(item => item.src).join("\n");
   const preview = () => frame.contentWindow?.postMessage({ type: "invitation-preview-update", content }, "*");
   const persist = () => {
-    try { localStorage.setItem("quince-invitation-draft", JSON.stringify(content)); saveState.textContent = "Borrador guardado"; }
+    try { localStorage.setItem("quince-invitation-draft", JSON.stringify({ base: original, draft: content })); saveState.textContent = "Borrador guardado"; }
     catch { saveState.textContent = "Vista previa actualizada"; }
   };
   const populate = () => {
@@ -21,10 +22,17 @@
     });
     schedules.value = formatSchedule(content.schedule);
     photos.value = formatPhotos(content.gallery);
+    positionSliders.forEach(slider => {
+      const [area, axis] = slider.dataset.position.split("-");
+      const value = content.photoPositions?.[area]?.[axis] ?? 50;
+      slider.value = value;
+      document.querySelector(`[data-position-value="${slider.dataset.position}"]`).value = `${value}%`;
+    });
   };
   try {
-    const draft = JSON.parse(localStorage.getItem("quince-invitation-draft") || "null");
-    if (draft && typeof draft === "object") content = { ...content, ...draft };
+    const saved = JSON.parse(localStorage.getItem("quince-invitation-draft") || "null");
+    if (saved?.draft && JSON.stringify(saved.base) === JSON.stringify(original)) content = { ...content, ...saved.draft };
+    else if (saved) saveState.textContent = "Se cargó la versión actual del proyecto";
   } catch {}
   populate();
   frame.addEventListener("load", preview);
@@ -47,6 +55,14 @@
     content.gallery = photos.value.split("\n").map(src => src.trim()).filter(Boolean).map((src, i) => ({ src, alt: `Foto ${i + 1} de la quinceañera` }));
     preview(); persist();
   });
+  positionSliders.forEach(slider => slider.addEventListener("input", () => {
+    const [area, axis] = slider.dataset.position.split("-");
+    content.photoPositions ||= {};
+    content.photoPositions[area] ||= { x: 50, y: 50 };
+    content.photoPositions[area][axis] = Number(slider.value);
+    document.querySelector(`[data-position-value="${slider.dataset.position}"]`).value = `${slider.value}%`;
+    preview(); persist();
+  }));
   document.getElementById("reset").addEventListener("click", () => {
     if (!window.confirm("Esto borrará el borrador guardado en este navegador y lo reemplazará con los datos que se cargaron desde content.js. ¿Quieres continuar?")) return;
     content = structuredClone(original);

@@ -18,7 +18,7 @@ Edit `content.js`:
 
 - Change the name, family names, date, city, ceremony/reception details and map links.
 - Update the schedule list and RSVP deadline.
-- Replace the sample photo URLs with your own. They appear as page backgrounds, including the cover.
+- The three included photos live in `assets/` and appear in the cover and page backgrounds. Keep the `assets/` folder beside `index.html` when copying or uploading the site.
 
 The sample name, event details, and stock photos are placeholders. Update them before sharing the invitation.
 
@@ -33,3 +33,4 @@ The RSVP section embeds the responder form configured in `content.js`. Link that
 - `content.js` — editable invitation details and media URLs
 - `script.js` — countdown, reveal animations, music controls, and RSVP behavior
 - `editor.html`, `editor.css`, and `editor.js` — in-browser live editor and preview
+- `assets/` — the three family-provided photos used by the invitation
