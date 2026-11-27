@@ -48,6 +48,7 @@
     preview(); persist();
   });
   document.getElementById("reset").addEventListener("click", () => {
+    if (!window.confirm("Esto borrará el borrador guardado en este navegador y lo reemplazará con los datos que se cargaron desde content.js. ¿Quieres continuar?")) return;
     content = structuredClone(original);
     try { localStorage.removeItem("quince-invitation-draft"); } catch {}
     populate(); preview(); saveState.textContent = "Restablecido al contenido original";

@@ -7,7 +7,6 @@
     document.querySelector('[data-map="ceremony"]').href = data.ceremonyMap || "#";
     document.querySelector('[data-map="reception"]').href = data.receptionMap || "#";
     document.querySelectorAll("[data-map]").forEach(link => { if (link.getAttribute("href") !== "#") { link.target = "_blank"; link.rel = "noreferrer"; } else { link.removeAttribute("target"); } });
-    if (data.dressCodeImage) document.querySelector(".dress-image").style.backgroundImage = `url("${data.dressCodeImage}")`;
     const timeline = document.getElementById("timeline"); timeline.replaceChildren();
     (data.schedule || []).forEach((item, i) => {
       const row = document.createElement("article"); row.className = "timeline-item reveal is-visible";
@@ -16,12 +15,6 @@
       row.querySelector("h3").textContent = item.title;
       row.querySelector("p").textContent = item.detail;
       timeline.append(row);
-    });
-    const gallery = document.getElementById("gallery"); gallery.replaceChildren();
-    (data.gallery || []).forEach((item, i) => {
-      const figure = document.createElement("figure"); figure.className = `gallery-item gallery-${i + 1} reveal is-visible`;
-      const img = document.createElement("img"); img.src = item.src; img.alt = item.alt || "Fotografía de la quinceañera"; img.loading = "lazy";
-      figure.append(img); gallery.append(figure);
     });
     if (data.gallery?.[0]?.src) document.querySelector(".hero-photo").style.backgroundImage = `url("${data.gallery[0].src}")`;
     if (data.gallery?.[2]?.src) document.querySelector(".date-photo").style.backgroundImage = `url("${data.gallery[2].src}")`;

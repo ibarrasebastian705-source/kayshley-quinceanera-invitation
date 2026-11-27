@@ -15,8 +15,6 @@ window.INVITATION = {
   "receptionTime": "5:00 de la tarde",
   "receptionPlace": "Salón · Dirección",
   "receptionMap": "https://maps.google.com/?q=Salón",
-  "musicAct": "Música y baile",
-  "musicNote": "Una noche llena de alegría",
   "schedule": [
     {
       "time": "2:00 PM",
@@ -57,7 +55,6 @@ window.INVITATION = {
       "alt": "Celebración al aire libre"
     }
   ],
-  "dressCodeImage": "https://images.unsplash.com/photo-1594552072238-b8a33785b261?auto=format&fit=crop&w=1400&q=85",
   "musicUrl": "",
   "rsvpDeadline": "1 de octubre"
 };
