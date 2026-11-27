@@ -39,22 +39,36 @@ window.INVITATION = {
   ],
   "gallery": [
     {
-      "src": "https://images.unsplash.com/photo-1529636798458-92182e662485?auto=format&fit=crop&w=1000&q=85",
-      "alt": "Retrato en un jardín al atardecer"
+      "src": "assets/IMG_9346.JPEG",
+      "alt": "Kayshley con su vestido de XV años al atardecer"
     },
     {
-      "src": "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1000&q=85",
-      "alt": "Flores claras para una celebración"
+      "src": "assets/IMG_9343.JPEG",
+      "alt": "Kayshley sonriendo en una blusa negra y jeans"
     },
     {
-      "src": "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1000&q=85",
-      "alt": "Luces cálidas en una fiesta"
-    },
-    {
-      "src": "https://images.unsplash.com/photo-1537633552985-df8429e8048b?auto=format&fit=crop&w=1000&q=85",
-      "alt": "Celebración al aire libre"
+      "src": "assets/IMG_9342.JPEG",
+      "alt": "Kayshley de niña con un vestido magenta"
     }
   ],
+  "photoPositions": {
+    "hero": {
+      "x": 50,
+      "y": 44
+    },
+    "date": {
+      "x": 50,
+      "y": 0
+    },
+    "schedule": {
+      "x": 50,
+      "y": 11
+    },
+    "rsvp": {
+      "x": 50,
+      "y": 54
+    }
+  },
   "musicUrl": "",
   "rsvpDeadline": "13 de Febrero",
   "googleFormUrl": "https://docs.google.com/forms/d/e/1FAIpQLSfNJupRecNZhMaoOqEnIHYWPUj-HnCsL0kxZqlOYEXHybgj6A/viewform?usp=publish-editor"
