@@ -10,7 +10,7 @@ You can also open `index.html` directly to view the invitation.
 
 ## Preview
 
-The page is plain HTML, CSS, and JavaScript and does not need a build step. Google Fonts and the sample gallery photos load from the internet.
+The page is plain HTML, CSS, and JavaScript and does not need a build step. Google Fonts load from the internet; family photos are stored in `assets/`.
 
 ## Personalize
 
@@ -18,7 +18,8 @@ Edit `content.js`:
 
 - Change the name, family names, date, city, ceremony/reception details and map links.
 - Update the schedule list and RSVP deadline.
-- The three included photos live in `assets/` and appear in the cover and page backgrounds. Keep the `assets/` folder beside `index.html` when copying or uploading the site.
+- The photos live in `assets/`; the date panel cycles through the paths in `dateSlides`. Keep the `assets/` folder beside `index.html` when copying or uploading the site.
+- The music button uses the MP3 path in `musicUrl` in `content.js`.
 
 The sample name, event details, and stock photos are placeholders. Update them before sharing the invitation.
 
@@ -33,4 +34,4 @@ The RSVP section embeds the responder form configured in `content.js`. Link that
 - `content.js` — editable invitation details and media URLs
 - `script.js` — countdown, reveal animations, music controls, and RSVP behavior
 - `editor.html`, `editor.css`, and `editor.js` — in-browser live editor and preview
-- `assets/` — the three family-provided photos used by the invitation
+- `assets/` — the family-provided photos and music used by the invitation

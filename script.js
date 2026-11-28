@@ -1,5 +1,6 @@
 (() => {
   let data = window.INVITATION || {};
+  let slideshowTimer;
   const renderContent = () => {
     const setText = (key, value) => document.querySelectorAll(`[data-content="${key}"]`).forEach(el => { el.textContent = value ?? ""; });
     Object.entries(data).forEach(([key, value]) => { if (typeof value === "string") setText(key, value); });
@@ -18,16 +19,35 @@
       row.querySelector("p").textContent = item.detail;
       timeline.append(row);
     });
+    const slideshow = document.getElementById("date-slideshow");
+    if (slideshowTimer) clearInterval(slideshowTimer);
+    slideshow.replaceChildren();
+    const slideSources = (data.dateSlides || []).length ? data.dateSlides : [data.gallery?.[2]?.src].filter(Boolean);
+    const datePhotos = slideSources.map(item => typeof item === "string" ? item : item.src).filter(Boolean);
+    datePhotos.forEach((src, index) => {
+      const slide = document.createElement("div");
+      slide.className = `date-photo${index === 0 ? " is-active" : ""}`;
+      slide.style.backgroundImage = `url("${src}")`;
+      slideshow.append(slide);
+    });
+    if (datePhotos.length > 1 && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      let activeSlide = 0;
+      slideshowTimer = setInterval(() => {
+        const slides = slideshow.querySelectorAll(".date-photo");
+        slides[activeSlide].classList.remove("is-active");
+        activeSlide = (activeSlide + 1) % slides.length;
+        slides[activeSlide].classList.add("is-active");
+      }, 6000);
+    }
     if (data.gallery?.[0]?.src) document.querySelector(".hero-photo").style.backgroundImage = `url("${data.gallery[0].src}")`;
-    if (data.gallery?.[2]?.src) document.querySelector(".date-photo").style.backgroundImage = `url("${data.gallery[2].src}")`;
     if (data.gallery?.[1]?.src) document.querySelector(".schedule-photo").style.backgroundImage = `url("${data.gallery[1].src}")`;
     if (data.gallery?.[3]?.src || data.gallery?.[0]?.src) document.querySelector(".rsvp-photo").style.backgroundImage = `url("${(data.gallery[3] || data.gallery[0]).src}")`;
     const setPhotoPosition = (selector, area, defaultY) => {
       const pos = data.photoPositions?.[area] || {};
-      document.querySelector(selector).style.backgroundPosition = `${pos.x ?? 50}% ${pos.y ?? defaultY}%`;
+      document.querySelectorAll(selector).forEach(el => { el.style.backgroundPosition = `${pos.x ?? 50}% ${pos.y ?? defaultY}%`; });
     };
     setPhotoPosition(".hero-photo", "hero", 42);
-    setPhotoPosition(".date-photo", "date", 46);
+    setPhotoPosition(".date-slideshow .date-photo", "date", 46);
     setPhotoPosition(".schedule-photo", "schedule", 50);
     setPhotoPosition(".rsvp-photo", "rsvp", 54);
     music.src = data.musicUrl || "";

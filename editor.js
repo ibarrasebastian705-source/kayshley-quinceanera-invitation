@@ -6,10 +6,12 @@
   const saveState = document.getElementById("save-state");
   const schedules = document.getElementById("schedule");
   const photos = document.getElementById("photos");
+  const dateSlides = document.getElementById("date-slides");
   const positionSliders = [...document.querySelectorAll("[data-position]")];
   const formatSchedule = items => (items || []).map(item => `${item.time} | ${item.title} | ${item.detail}`).join("\n");
   const parseSchedule = value => value.split("\n").map(line => line.split("|").map(part => part.trim())).filter(parts => parts[0] && parts[1]).map(([time, title, detail = ""]) => ({ time, title, detail }));
   const formatPhotos = items => (items || []).map(item => item.src).join("\n");
+  const formatSlides = items => (items || []).map(item => typeof item === "string" ? item : item.src).join("\n");
   const preview = () => frame.contentWindow?.postMessage({ type: "invitation-preview-update", content }, "*");
   const persist = () => {
     try { localStorage.setItem("quince-invitation-draft", JSON.stringify({ base: original, draft: content })); saveState.textContent = "Borrador guardado"; }
@@ -22,6 +24,7 @@
     });
     schedules.value = formatSchedule(content.schedule);
     photos.value = formatPhotos(content.gallery);
+    dateSlides.value = formatSlides(content.dateSlides);
     positionSliders.forEach(slider => {
       const [area, axis] = slider.dataset.position.split("-");
       const value = content.photoPositions?.[area]?.[axis] ?? 50;
@@ -53,6 +56,10 @@
   schedules.addEventListener("input", () => { content.schedule = parseSchedule(schedules.value); preview(); persist(); });
   photos.addEventListener("input", () => {
     content.gallery = photos.value.split("\n").map(src => src.trim()).filter(Boolean).map((src, i) => ({ src, alt: `Foto ${i + 1} de la quinceañera` }));
+    preview(); persist();
+  });
+  dateSlides.addEventListener("input", () => {
+    content.dateSlides = dateSlides.value.split("\n").map(src => src.trim()).filter(Boolean);
     preview(); persist();
   });
   positionSliders.forEach(slider => slider.addEventListener("input", () => {
